@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters {
-        choice(name: 'executeStages', choices: ['1', '2', '3', ], description: 'Select stages to execute')
+        choice(name: 'executeStages', choices: ['1', '2', '3', '4', ], description: 'Select stages to execute')
     }
     stages {
         stage('Stage 1') {
@@ -28,7 +28,20 @@ pipeline {
             steps {
                 echo "it is third stage"
             }
+        } 
+
+        stage('Stage 4') {
+            when {
+                expression { params.executeStages.contains('4') }
+            }
+            steps {
+                echo "it is fourth stage"
+            }
         }
+
+
+
+
         
         
     }
